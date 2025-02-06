@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        int age, yearsLeft;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter your age:");
+        age = scan.nextInt();
+        
+        if (age >= 18) {
+            System.out.println("Welcome to the voting system. You can vote.");
+        } else {
+            yearsLeft = 18 - age;
+            System.out.println("Sorry, you can vote after: " + yearsLeft + " years");
+        }
+        
+        scan.close();
+    }
+}
