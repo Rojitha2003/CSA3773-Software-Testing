@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        System.out.println("Enter a decimal number:");
+        int decimal = in.nextInt();
+        
+        // Convert decimal to binary
+        String binary = Integer.toBinaryString(decimal);
+        System.out.println("BINARY IS " + binary);
+        
+        // Convert decimal to octal
+        System.out.println("OCTAL IS " + Integer.toOctalString(decimal));
+        
+        in.close();
+    }
+}
