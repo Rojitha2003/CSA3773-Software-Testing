@@ -1,0 +1,28 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class OpenGoogleFirefox {
+    public static void main(String[] args) {
+        // Set the path for GeckoDriver
+        System.setProperty("webdriver.gecko.driver", "path/to/geckodriver"); 
+        
+        // Initialize WebDriver
+        WebDriver driver = new FirefoxDriver();
+        
+        // Open Google
+        driver.get("https://www.google.com");
+        
+        // Print title of the page
+        System.out.println("Page title: " + driver.getTitle());
+        
+        // Wait for 3 seconds (optional)
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Close the browser
+        driver.quit();
+    }
+}
