@@ -1,0 +1,57 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
+public class IRCTCLoginAutomation {
+    public static void main(String[] args) {
+        // Set the path for ChromeDriver
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver"); 
+        
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Open IRCTC login page
+        driver.get("https://www.irctc.co.in/nget/train-search");
+
+        // Maximize the window
+        driver.manage().window().maximize();
+
+        // Wait until the login button is clickable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'LOGIN')]")));
+        loginButton.click();
+
+        // Wait for the username field to be visible
+        WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("userId")));
+        usernameField.sendKeys("your_username"); // Replace with your username
+
+        // Find the password field and enter the password
+        WebElement passwordField = driver.findElement(By.id("pwd"));
+        passwordField.sendKeys("your_password"); // Replace with your password
+
+        // Wait for CAPTCHA and instruct user to enter it manually
+        System.out.println("Please enter the CAPTCHA manually and press Enter...");
+        new java.util.Scanner(System.in).nextLine(); // Waits for user input before proceeding
+
+        // Find and click the Sign-In button
+        WebElement signInButton = driver.findElement(By.xpath("//button[contains(text(),'SIGN IN')]"));
+        signInButton.click();
+
+        // Wait for login process to complete
+        try {
+            Thread.sleep(5000); // Adjust wait time if needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Print the title of the current page after login
+        System.out.println("Logged in! Current page title: " + driver.getTitle());
+
+        // Close the browser
+        driver.quit();
+    }
+}
