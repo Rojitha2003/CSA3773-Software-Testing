@@ -1,0 +1,46 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ARMSLoginAutomation {
+    public static void main(String[] args) {
+        // Set the path for ChromeDriver
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+        
+        try {
+            // Open ARMS portal
+            driver.get("https://arms.sse.saveetha.com/");
+            
+            // Maximize the window
+            driver.manage().window().maximize();
+            
+            // Locate username field and enter username
+            WebElement usernameField = driver.findElement(By.id("username")); // Change 'id' if needed
+            usernameField.sendKeys("192111394"); // Replace with your username
+
+            // Locate password field and enter password
+            WebElement passwordField = driver.findElement(By.id("password")); // Change 'id' if needed
+            passwordField.sendKeys("9666800991"); // Replace with your password
+
+            // Locate login button and click
+            WebElement loginButton = driver.findElement(By.id("loginButton")); // Change 'id' if needed
+            loginButton.click();
+
+            // Wait for a few seconds (optional)
+            Thread.sleep(5000);
+            
+            // Print success message
+            System.out.println("Login attempted successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close the browser after execution
+            driver.quit();
+        }
+    }
+}
