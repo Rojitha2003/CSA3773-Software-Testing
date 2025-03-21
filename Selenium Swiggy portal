@@ -1,0 +1,51 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
+public class SwiggyLoginAutomation {
+    public static void main(String[] args) {
+        // Set the path for ChromeDriver
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Open Swiggy login page
+            driver.get("https://www.swiggy.com/");
+
+            // Maximize the window
+            driver.manage().window().maximize();
+
+            // Wait until the login button is clickable
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Login')]")));
+            loginButton.click();
+
+            // Wait for the mobile number input field
+            WebElement mobileField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mobile")));
+            mobileField.sendKeys("your_mobile_number"); // Replace with your phone number
+
+            // Click on the "Send OTP" button
+            WebElement sendOTPButton = driver.findElement(By.xpath("//button[contains(text(),'CONTINUE')]"));
+            sendOTPButton.click();
+
+            // Wait for user to enter OTP manually
+            System.out.println("Please enter the OTP manually and press Enter...");
+            new java.util.Scanner(System.in).nextLine(); // Wait for user input before proceeding
+
+            // Print success message
+            System.out.println("Login attempted successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close the browser after execution
+            driver.quit();
+        }
+    }
+}
